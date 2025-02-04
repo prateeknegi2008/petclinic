@@ -1,0 +1,10 @@
+image:
+  repository: 192.168.1.151/petclinic
+  pullPolicy: Always
+  tag: v15
+
+replicaCount: 2
+
+Service:
+  type: LoadBalancer
+  port: 8080
