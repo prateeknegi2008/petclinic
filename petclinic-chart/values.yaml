@@ -1,5 +1,5 @@
 image:
-  repository: 192.168.1.151:5000/petclinic
+  repository: 192.168.1.171:5001/nexus-repo/petclinic
   pullPolicy: Always
   tag: v15
 
