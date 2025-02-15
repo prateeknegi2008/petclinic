@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}-service
 spec:
   selector:
-    app: {{ .Release.Name }}-{{ .Chart.AppVersion }}
+    app: {{ .Release.Name }}
   ports:
     - port: {{ .Values.Service.port }}
       targetPort: {{ .Values.Service.port }}
