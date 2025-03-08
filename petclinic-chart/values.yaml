@@ -1,6 +1,6 @@
 image:
   repository: 192.168.1.171:5001/nexus-repo/petclinic
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   tag: v15
 
 replicaCount: 2
