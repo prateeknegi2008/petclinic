@@ -30,7 +30,7 @@ pipeline {
         stage('Get SCM') {
             steps {
                 echo 'Clone from GIT'
-                git branch: 'releasebranch-1.0.0', url: 'https://github.com/prateeknegi2008/petclinic.git'
+                git branch: 'main', url: 'https://github.com/prateeknegi2008/petclinic.git'
             }
         }
         
