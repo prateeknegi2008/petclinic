@@ -21,7 +21,7 @@ pipeline {
    
 
     stages {
-         state('Hello world'){
+         stage('Hello world'){
            steps{
              script{
                hello-world() 
