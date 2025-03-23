@@ -120,11 +120,11 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId:"nexus-repo-cred",
                 usernameVariable: "nexususername",
                 passwordVariable: "nexuspassword")]){
-                sh '''
-                docker tag petclinic:v"$VERSION" 192.168.1.171:5001/nexus-repo/petclinic:v"$VERSION"
-                docker login -u "${env.nexususername}" -p "${env.nexuspassword}" 192.168.1.171:5001
-                docker push 192.168.1.171:5001/nexus-repo/petclinic:v"$VERSION"
-                '''
+                sh """
+                docker tag petclinic:v${VERSION} 192.168.1.171:5001/nexus-repo/petclinic:v{VERSION}
+                docker login -u ${env.nexususername} -p ${env.nexuspassword} 192.168.1.171:5001
+                docker push 192.168.1.171:5001/nexus-repo/petclinic:v${VERSION}
+                """
                 
                 }}}
                 
