@@ -37,9 +37,9 @@ pipeline {
         
         stage('Get SCM') {
             steps {
-                echo 'Clone from GIT'
-                git branch: 'main', url: 'https://github.com/prateeknegi2008/petclinic.git'
-            }
+              script {
+                clone(https://github.com/prateeknegi2008/petclinic.git,main)
+            }}
         }
         
                 stage('Mvn validate') {
