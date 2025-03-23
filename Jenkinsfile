@@ -122,7 +122,8 @@ pipeline {
                 passwordVariable: "nexuspassword")]){
                 sh """
                 docker tag petclinic:v${VERSION} 192.168.1.171:5001/nexus-repo/petclinic:v${VERSION}
-                docker login -u ${env.nexususername} -p ${env.nexuspassword} 192.168.1.171:5001
+                echo ${env.nexuspassword} | docker login -u ${env.nexususername} 192.168.1.171:5001 --password-stdin
+                #docker login -u ${env.nexususername} -p ${env.nexuspassword} 192.168.1.171:5001
                 docker push 192.168.1.171:5001/nexus-repo/petclinic:v${VERSION}
                 """
                 
@@ -130,17 +131,20 @@ pipeline {
                 
             stage('Move helm chart to nexus repo') {
             steps {
-                sh '''
+                withCredentials([usernamePassword(credentialsId:"nexus-repo-cred",
+                usernameVariable: "nexususername",
+                passwordVariable: "nexuspassword")]){
+                sh """
                 helm lint petclinic-chart
                 helm template petclinic-chart
                 sed -i "s/v15/v${VERSION}/" petclinic-chart/values.yaml
                 sed -i "s/0.1.1/${VERSION}/" petclinic-chart/Chart.yaml 
                 sed -i "s/1.0.0/${VERSION}/" petclinic-chart/Chart.yaml 
                 helm package petclinic-chart
-                curl -u admin:admin1234  http://192.168.1.171:8081/repository/helm-repo/ --upload-file petclinic-chart-"${VERSION}".tgz 
-                '''
+                curl -u ${env.nexususername}:${env.nexuspassword}  http://192.168.1.171:8081/repository/helm-repo/ --upload-file petclinic-chart-${VERSION}.tgz 
+                """
                 
-                }
+                }}
         }
     
     
