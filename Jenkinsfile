@@ -38,7 +38,7 @@ pipeline {
         stage('Get SCM') {
             steps {
               script {
-                clone(https://github.com/prateeknegi2008/petclinic.git,main)
+                clone("https://github.com/prateeknegi2008/petclinic.git","main")
             }}
         }
         
