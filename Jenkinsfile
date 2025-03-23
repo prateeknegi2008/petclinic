@@ -1,3 +1,4 @@
+@Library("shared_libraries") _
 pipeline {
     
     agent {
@@ -20,6 +21,13 @@ pipeline {
    
 
     stages {
+         state('Hello world'){
+           steps{
+             script{
+               hello-world() 
+
+         
+         }}}
         
          stage('Clean WS') {
             steps {
