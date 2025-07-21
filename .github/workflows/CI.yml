@@ -37,7 +37,7 @@ jobs:
             scan-type: 'fs'
             scan-ref: '.'
             output: trivy-report.html
-            format: html
+            format: table
             exit-code: 0
         - name: Upload Vulnerability Scan Results
           uses: actions/upload-artifact@v4
