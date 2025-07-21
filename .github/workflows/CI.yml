@@ -1,6 +1,8 @@
 name: Java CI with manual run
 
 on:
+  push:
+    branches: "enegpra-patch-3"
   workflow_dispatch:
   
 
