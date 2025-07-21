@@ -25,3 +25,23 @@ jobs:
           run: mvn compile
         - name: Test with maven
           run: mvn test
+    Trivy_fs_scan_code:
+
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v4
+        - name: Trivy_fs_scan_code
+          uses: aquasecurity/trivy-action@0.28.0
+          with:
+            scan-type: 'fs'
+            scan-ref: '.'
+            output: trivy-report.html
+            format: html
+            exit-code: 0
+        - name: Upload Vulnerability Scan Results
+          uses: actions/upload-artifact@v4
+          with:
+            name: trivy-report
+            path: trivy-report.html
+            retention-days: 30
